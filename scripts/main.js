@@ -1,25 +1,33 @@
 const API = "https://pokeapi.co/api/v2/pokemon";
+
 const form = document.getElementById("pokeform");
 const input = document.getElementById("pokeinput");
+
+const pokemonContainer = document.getElementById("pokeinfo");
 const image = document.getElementById("pokeimage");
+const pokeName = document.getElementById("pokemon-name");
+
 const loader = document.getElementById("pokeloader");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   showElement(loader);
-  hideElement(image);
+  hideElement(pokemonContainer);
   let name = input.value.toLowerCase();
   let info = await fetchData(`${API}/${name}`);
-  image.src = info.sprites.other["official-artwork"].front_default;
-  hideElement(loader);
-  showElement(image);
+  if (info) {
+    getPokemon(info);
+  }
 });
 
-// TODO: Add error handler
 async function fetchData(urlApi) {
-  const response = await fetch(urlApi);
-  const data = await response.json();
-  return data;
+  try {
+    const response = await fetch(urlApi);
+    const data = await response.json();
+    return data;
+  } catch {
+    getUnknownPokemon();
+  }
 }
 
 function hideElement(element) {
@@ -29,3 +37,18 @@ function hideElement(element) {
 function showElement(element) {
   element.classList.remove("hidden");
 }
+
+function getPokemon(pokemonInfo) {
+  image.src = pokemonInfo.sprites.other["official-artwork"].front_default;
+  pokeName.innerText = `#${pokemonInfo.id} - ${pokemonInfo.name}`;
+}
+
+function getUnknownPokemon() {
+  image.src = "assets/MissingNO.webp";
+  pokeName.innerText = "#000 - MissingNO";
+}
+
+image.onload = () => {
+  hideElement(loader);
+  showElement(pokemonContainer);
+};

@@ -13,20 +13,31 @@
     </header>
     <main>
       <div class="pokedex">
-        <form id="pokeform">
-          <input id="pokeinput" type="text" placeholder="Enter name or #000" />
-        </form>
-        <div>
-          <img id="pokeimage" src="./assets/idle-pokeball.png" alt="" />
-          <div id="pokeloader" class="wrapper hidden">
-            <div class="pokeball"></div>
+        <div class="pokedex-container">
+          <form id="pokeform">
+            <input
+              id="pokeinput"
+              type="text"
+              placeholder="Enter name or #000"
+            />
+          </form>
+          <div class="results">
+            <div id="pokeinfo">
+              <img id="pokeimage" src="./assets/idle-pokeball.png" alt="" />
+              <h1 id="pokemon-name"></h1>
+            </div>
+            <div id="pokeloader" class="hidden">
+              <div class="wrapper">
+                <div class="pokeball"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </main>
     <footer>
       Made with love by
-      <a href="https://github.com/DALO-eng" target="_blank">DALO-eng</a>
+      <a href="https://github.com/DALO-eng" target="_blank"> DALO-eng</a>
     </footer>
   </body>
   <script src="./scripts/main.js"></script>
